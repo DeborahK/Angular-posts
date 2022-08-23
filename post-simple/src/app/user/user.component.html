@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>Reactive Approach</h1>
+  <h2>Select a User</h2>
+  <div *ngIf='users$ | async as users'>
+    <select class="form-select form-select-lg form-control"
+            (change)="onSelected($any($event.target).value)">
+      <option value="">--Select a user--</option>
+      <option *ngFor="let user of users"
+              [value]="user.id">{{ user.name }}</option>
+    </select>
+  </div>
+
+  <ng-container *ngIf="{selectedUser: selectedUser$ | async, 
+    todos: todos$ | async} as userInfo">
+    <div *ngIf="userInfo.selectedUser && userInfo.todos">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Title</th>
+            <th>Completed?</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let todo of userInfo.todos">
+          <tr>
+            <td>{{ userInfo.selectedUser.name }}</td>
+            <td>{{ todo.title }}</td>
+            <td>{{ todo.completed }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+
+  <br>
+  <h2>All Users with their ToDos</h2>
+    <table class="table" *ngFor="let userData of usersWithTodos$ | async">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Title</th>
+          <th>Completed?</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let todo of userData.todos">
+        <tr>
+          <td>{{ userData.user.name }}</td>
+          <td>{{ todo.title }}</td>
+          <td>{{ todo.completed }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>

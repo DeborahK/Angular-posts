@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-header">
+    {{title}}
+  </div>
+
+  <div class="card-body">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-3">
+          <div class="input-group">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Select a Category"
+                   [(ngModel)]="selectedCategory"
+                   (selectItem)="categorySelected($event.item)"
+                   [ngbTypeahead]="search"
+                   [inputFormatter]="formatter"
+                   [resultFormatter]="formatter"
+                   [editable]='false'
+                   #instance="ngbTypeahead"
+                   (focus)="focus$.next($any($event).target.value)"
+                   (click)="click$.next($any($event).target.value)" />
+            <button type="button"
+                    class="btn bg-transparent"
+                    style="margin-left: -40px; z-index: 100;"
+                    (click)="onClear()">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="table-responsive"
+         *ngIf="postsForCategory$ | async as posts">
+      <table class="table mb-0"
+             *ngIf="posts.length">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Body</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let post of posts">
+            <td>{{ post.title }}</td>
+            <td>{{ post.body }}</td>
+            <td>{{ post.category }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

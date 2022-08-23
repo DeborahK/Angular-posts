@@ -1,0 +1,59 @@
+<div class="card">
+  <div class="card-header">
+    {{title}}
+  </div>
+
+  <div class="card-body"
+       *ngIf="postsGroupedByCategory$ | async as groups">
+
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Body</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let group of groups">
+            <tr *ngFor="let post of group[1]; let i = index">
+              <td>{{ i===0 ? post.category : '' }}</td>
+              <td>{{ post.title }}</td>
+              <td>{{ post.body }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Alternate: Display key/value pairs  -->
+  <!-- <div class="card-body"
+       *ngIf="postsGroupedByCategoryKeyValue$ | async as groups">
+
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Body</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let group of groups | keyvalue">
+            <tr *ngFor="let post of group.value; let i = index">
+              <td>{{ i===0 ? post.category : '' }}</td>
+              <td>{{ post.title }}</td>
+              <td>{{ post.body }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+  </div> -->
+
+</div>
