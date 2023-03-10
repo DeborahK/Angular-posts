@@ -1,0 +1,40 @@
+<div class="container my-5">
+  <h2>A Single User with their ToDos</h2>
+
+  <div *ngIf='users$ | async as users'>
+    <select class="form-select form-select-lg form-control"
+            (change)="onSelected($any($event.target).value)">
+      <option value="">--Select a user--</option>
+      <option *ngFor="let user of users"
+              [value]="user.id">{{ user.name }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="{selectedUser: selectedUser$ | async, 
+    todos: todos$ | async} as userInfo">
+    <div class="card mt-2"
+         *ngIf="userInfo.selectedUser && userInfo.todos">
+      <div class="card-header">{{userInfo.selectedUser.name}}</div>
+      <div class="card-body">
+        <table class="table-responsive">
+          <thead>
+            <tr>
+              <th>Task Title</th>
+              <th>Completed?</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let todo of userInfo.todos">
+            <tr>
+              <td>{{ todo.title }}</td>
+              <td>{{ todo.completed }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card-footer alert alert-danger mb-0"
+         *ngIf="errorMessage">{{errorMessage}}
+    </div>
+  </div>
+</div>
