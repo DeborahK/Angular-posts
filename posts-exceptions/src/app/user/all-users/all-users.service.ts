@@ -84,14 +84,11 @@ export class AllUsersService {
             todos
           } as UserData)),
           retry(3),
-          catchError(err => {
-            return of({
-              user,
-              todos: [],
-              message: `Error retrieving todos for user: ${user.name}`
-            } as UserData);
-          }
-          )))
+          catchError(err => of({
+            user,
+            todos: [],
+            message: `Error retrieving todos for user: ${user.name}`
+          } as UserData))))
     )));
 
   // Try 6: RetryWhen
