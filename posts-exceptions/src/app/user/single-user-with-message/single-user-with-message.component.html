@@ -8,6 +8,10 @@
               [value]="user.id">{{ user.name }}</option>
     </select>
   </div>
+ 
+  <!-- Example with accessing child property
+    <div *ngIf="(todosWithMessage$ | async)?.todos as todos">
+  -->
 
   <div *ngIf="{selectedUser: selectedUser$ | async, 
   todosWithMessage: todosWithMessage$ | async} as userInfo">

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { catchError, EMPTY } from 'rxjs';
-import { SingleUserService } from './single-user.service';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-single-user',
@@ -34,7 +34,7 @@ export class SingleUserComponent {
     })
   );
 
-  constructor(private userService: SingleUserService) { }
+  constructor(private userService: UserService) { }
 
   onSelected(userId: number): void {
     this.userService.onSelected(userId);

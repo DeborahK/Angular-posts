@@ -4,7 +4,7 @@ import { catchError, of, Subject, switchMap, tap } from "rxjs";
 import { ToDo, User } from "../user";
 
 @Injectable({ providedIn: 'root' })
-export class SingleUserService {
+export class UserService {
   userUrl = User.userUrl;
   userUrlErr = User.userUrlErr;
 
