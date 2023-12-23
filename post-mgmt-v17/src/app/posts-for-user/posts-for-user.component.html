@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-header">
+    {{title}}
+  </div>
+
+  <div class="card-body">
+    <div class="container">
+      <div class="input-group mb-3">
+        <div class="input-group-append">
+            <input type="search"
+                   placeholder="User name"
+                   aria-label="User name"
+                   [(ngModel)]="userName"
+                   (keyup.enter)="getPosts()">
+            <button class="btn btn-outline-secondary"
+                    (click)="getPosts()">
+              <span style="color:cornflowerblue">
+                <i class="fa fa-search"></i>
+              </span>
+            </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive"
+         *ngIf="postsForUser$ | async as posts">
+      <table class="table mb-0"
+             *ngIf="posts.length">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Body</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let post of posts">
+          <tr>
+            <td>{{ post.title }}</td>
+            <td>{{ post.body }}</td>
+            <td>{{ post.category }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="alert alert-danger"
+     *ngIf="errorMessage$ | async as errorMessage">
+  {{ errorMessage }}
+</div>

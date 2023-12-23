@@ -1,0 +1,45 @@
+<div class="card">
+  <div class="card-header">
+    {{title}}
+  </div>
+
+  <div class="card-body">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-3">
+          <div class="input-group">
+            <select class="form-select"
+                    placeholder="Select a Category"
+                    [ngModel]="selectedCategory"
+                    (ngModelChange)="categorySelected($event)">
+              <option value="">All categories</option>
+              @for (category of categories(); track category) {
+              <option [value]="category.id">{{ category.name }}</option>
+              }
+            </select>
+          </div>
+        </div>
+      </div>
+
+      @if (posts().length) {
+      <div>
+        <div class="row">
+          <div class="col-md-4 fw-bold">Title</div>
+          <div class="col-md-6 fw-bold">Body</div>
+          <div class="col-md-2 fw-bold">Category</div>
+        </div>
+        <div class="row">
+          <!-- Display the cart items -->
+          @for (post of posts(); track post) {
+          <div class="col-md-4">{{ post.title }} </div>
+          <div class="col-md-6">{{ post.body}}</div>
+          <div class="col-md-2">{{post.category}}</div>
+          }
+        </div>
+      </div>
+      } @else {
+      No posts in category
+      }
+    </div>
+  </div>
+</div>

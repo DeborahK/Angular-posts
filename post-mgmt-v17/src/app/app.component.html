@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <a class="navbar-brand">{{title}}</a>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link"
+         routerLink='/posts'
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact : true}">Posts for a Category</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"
+         routerLink='/posts/grouped'
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact : true}">All Posts Grouped by Category</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"
+         routerLink='/posts/user'
+         routerLinkActive="active">Your Posts</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
